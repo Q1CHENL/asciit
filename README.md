@@ -5,13 +5,13 @@ A more compact and intuitive ASCII table in your terminal: an alternative to `ma
 ## Screenshots
 
 `asciit` or `asciit v`
-![UI](screenshot-v.png)
+![UI](assets/screenshot-v.png)
 `man 7 ascii`
-![UI](man7ascii.png)
+![UI](assets/man7ascii.png)
 `asciit h`
-![UI](screenshot-h.png)
+![UI](assets/screenshot-h.png)
 `ascii`
-![UI](ascii.png)
+![UI](assets/ascii.png)
 
 ### Note
 
