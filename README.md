@@ -1,6 +1,6 @@
 # asciit
 
-A more compact and intuitive ASCII table in your terminal: an alternative to `man 7 ascii`. Colored numbers and letters are much more easier to find.
+A more compact and intuitive ASCII table in your terminal: an alternative to `man 7 ascii` and `ascii`. Colored numbers and letters are much more easier to find. The table style is inspired by [hexyl](https://github.com/sharkdp/hexyl)
 
 ## Screenshots
 
