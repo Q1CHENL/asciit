@@ -28,7 +28,7 @@ fn main() {
                 exit(0);
             }
             &_ => {
-                eprintln!("{} {}", "Wrong argument: ", argument);
+                eprintln!("{} {}", "Known arguments: ", argument);
                 exit(1)
             }
         }
