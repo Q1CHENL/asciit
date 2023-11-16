@@ -18,6 +18,10 @@ cargo build --release
 dnf copr enable qichen/asciit # enable the repo 
 dnf install asciit # install
 ```
+- Arch Linux:
+```
+yay -S asciit
+```
 
 - Other platforms:
 
