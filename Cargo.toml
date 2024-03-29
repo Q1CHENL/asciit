@@ -2,6 +2,10 @@
 name = "asciit"
 version = "1.0.0"
 edition = "2021"
+description = "A compact and visually appealing ASCII table for your terminal, featuring colored numbers and letters."
+license = "MIT"
+repository = "https://github.com/Q1CHENL/asciit"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
