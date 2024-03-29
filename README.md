@@ -12,26 +12,33 @@ cargo build --release
 
 ## Installation
 
+- Cargo
+```bash
+cargo install asciit
+```
+
 - Fedora Linux:
 
-```shell
+```bash
 dnf copr enable qichen/asciit # enable the repo 
 dnf install asciit # install
 ```
+
 - Arch Linux:
-```
+
+```bash
 yay -S asciit
 ```
 
-- Other platforms:
+- Clone and install
 
-```shell
+```bash
 git clone https://github.com/Q1CHENL/asciit
 cd asciit
 cargo install --path .
 ```
 
-## Screenshots
+## Screenshots & Comparison
 
 `asciit` or `asciit v`
 ![UI](assets/screenshot-v.png)
