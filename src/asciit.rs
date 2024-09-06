@@ -1,90 +1,105 @@
 use colored::*;
 use std::{env, process::exit};
+mod print;
+
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
-    let cnt = args.len();
-    if cnt > 1 {
-        eprintln!("{} {}", "Wrong number of arguments: ", cnt);
-        exit(1);
-    }
+
     let mut row_number = 32;
     let mut col_number = 4;
-    for argument in args {
+    let mut use_color = true;
+    let mut print_special_explained = true;
+    let mut horizontal = false;
+
+    // Parse arguments
+    for argument in &args {
         match argument.as_str() {
             "h" => {
                 row_number = 16;
-                col_number = 8
+                col_number = 8;
+                horizontal = true
             }
             "v" => {
                 row_number = 32;
-                col_number = 4
+                col_number = 4;
+            }
+            "--no-color" => {
+                use_color = false;
+            }
+            "--no-explain" => {
+                print_special_explained = false
+                // print_explanation_specials(); // Assuming this will be used later
             }
             "--help" => {
-                print_help();
+                print::print_help();
                 exit(0);
             }
-            &_ => {
-                eprintln!("{} {}", "Unknown arguments: ", argument);
-                exit(1)
+            _ => {
+                eprintln!("Unknown argument: {}", argument);
+                exit(1);
             }
         }
     }
-    let specials: [&str; 33] = [
-        "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "HT", "LF", "VT", "FF", "CR",
-        "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB",
-        "ESC", "FS", "GS", "RS", "US", "DEL",
-    ];
+
+    let wide_col_num = if horizontal && print_special_explained {
+        2
+    } else if print_special_explained {
+        1
+    } else {
+        0
+    };
+    let narrow_col_num = col_number - wide_col_num;
+
     // Header
-    print!("┌");
-    print!("{}", "───────────┬".repeat(col_number - 1));
-    print!("───────────");
-    println!("┐");
-    let header = format!("│{:<3} {:<3} {:<3}", "Dec", "Hex", "Chr").repeat(col_number);
+    print::print_table_header(wide_col_num, narrow_col_num);
 
-    print!("{}", header);
-    println!("│");
-    print!("├");
-    print!("{}", "───────────┼".repeat(col_number - 1));
-    println!("───────────┤");
-
-    // print row by row
+    // Print table row by row
     for row in 0..row_number {
         for col in 0..col_number {
-            // Explicitly cast to u8 to avoid type ambiguity
-            // i is the index of the current char
             let i = (row + col * row_number) as u8;
 
-            let ch = if i.is_ascii_graphic() || i == 32 {
-                let char_i = i as char;
-                if char_i.is_lowercase() {
-                    format!("{}  ", char_i.to_string().bright_blue())
-                } else if char_i.is_uppercase() {
-                    format!("{}  ", char_i.to_string().blue())
-                } else if char_i.is_ascii_digit() {
-                    format!("{}  ", char_i.to_string().green())
+            let ch = format_character(
+                i,
+                use_color,
+                if print_special_explained {
+                    &print::SPECIALS_EXPLAINED
                 } else {
-                    char_i.to_string()
-                }
-            } else if i == 127 {
-                specials[32].to_string()
+                    &print::SPECIALS
+                },
+            );
+            let padded_str = if i < 32 && print_special_explained {
+                // For special characters with descriptions
+                format!("│{:<3} {:<3X} {:<31}", i, i, ch)
             } else {
-                specials[i as usize].to_string()
+                // For normal characters, no extra padding
+                format!("│{:<3} {:<3X} {:<3}", i, i, ch)
             };
-            print!("│{:<3} {:<3X} {:<3}", i, i, ch);
+
+            print!("{}", padded_str);
         }
         println!("│");
     }
-    print!("└");
-    print!("{}", "───────────┴".repeat(col_number - 1));
-    print!("───────────");
-    println!("┘");
+
+    // Footer
+    print::print_table_footer(wide_col_num, narrow_col_num);
 }
 
-fn print_help() {
-    println!(
-        "Usage:\n
-    ascii h: print the horizontal table (16 x 8) (default)\n
-    ascii v: print the vertical table (32 x 4)\n
-    ascii --help: print this help message"
-    );
+fn format_character(i: u8, use_color: bool, specials_explained: &[&str; 33]) -> String {
+    if i.is_ascii_graphic() || i == 32 {
+        let char_i = i as char;
+        if use_color {
+            if char_i.is_lowercase() {
+                return format!("{}  ", char_i.to_string().bright_blue());
+            } else if char_i.is_uppercase() {
+                return format!("{}  ", char_i.to_string().blue());
+            } else if char_i.is_ascii_digit() {
+                return format!("{}  ", char_i.to_string().green());
+            }
+        }
+        return char_i.to_string();
+    } else if i == 127 {
+        return specials_explained[32].to_string();
+    } else {
+        return specials_explained[i as usize].to_string();
+    }
 }
