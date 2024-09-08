@@ -1,6 +1,6 @@
 [package]
 name = "asciit"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 description = "A compact and visually appealing ASCII table for your terminal, featuring colored numbers and letters."
 license = "MIT"
