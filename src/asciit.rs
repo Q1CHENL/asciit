@@ -17,7 +17,7 @@ fn main() {
             "h" => {
                 row_number = 16;
                 col_number = 8;
-                horizontal = true
+                horizontal = true;
             }
             "v" => {
                 row_number = 32;
@@ -27,8 +27,7 @@ fn main() {
                 use_color = false;
             }
             "--no-explain" => {
-                print_special_explained = false
-                // print_explanation_specials(); // Assuming this will be used later
+                print_special_explained = false;
             }
             "--help" => {
                 print::print_help();
@@ -41,6 +40,7 @@ fn main() {
         }
     }
 
+    // Number of columns with explainations for special chars
     let wide_col_num = if horizontal && print_special_explained {
         2
     } else if print_special_explained {
@@ -53,7 +53,7 @@ fn main() {
     // Header
     print::print_table_header(wide_col_num, narrow_col_num);
 
-    // Print table row by row
+    // Print table body row by row
     for row in 0..row_number {
         for col in 0..col_number {
             let i = (row + col * row_number) as u8;
@@ -84,6 +84,7 @@ fn main() {
     print::print_table_footer(wide_col_num, narrow_col_num);
 }
 
+// return the final formatted (colored) character
 fn format_character(i: u8, use_color: bool, specials_explained: &[&str; 33]) -> String {
     if i.is_ascii_graphic() || i == 32 {
         let char_i = i as char;
