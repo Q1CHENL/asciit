@@ -10,6 +10,7 @@ fn main() {
     let mut use_color = true;
     let mut print_special_explained = true;
     let mut horizontal = false;
+    let mut octal = false;
 
     // Parse arguments
     for argument in &args {
@@ -23,6 +24,9 @@ fn main() {
                 row_number = 32;
                 col_number = 4;
             }
+            "--octal" | "-O" => {
+                octal = true;
+            }
             "--no-color" => {
                 use_color = false;
             }
@@ -35,6 +39,7 @@ fn main() {
             }
             _ => {
                 eprintln!("Unknown argument: {}", argument);
+                print::print_help();
                 exit(1);
             }
         }
@@ -51,7 +56,7 @@ fn main() {
     let narrow_col_num = col_number - wide_col_num;
 
     // Header
-    print::print_table_header(wide_col_num, narrow_col_num);
+    print::print_table_header(octal, wide_col_num, narrow_col_num);
 
     // Print table body row by row
     for row in 0..row_number {
@@ -69,10 +74,18 @@ fn main() {
             );
             let padded_str = if i < 32 && print_special_explained {
                 // For special characters with descriptions
-                format!("│{:<3} {:<3X} {:<31}", i, i, ch)
+                if octal {
+                    format!("│{:<3} {:<3o} {:<31}", i, i, ch)
+                } else {
+                    format!("│{:<3} {:<3X} {:<31}", i, i, ch)
+                }
             } else {
                 // For normal characters, no extra padding
-                format!("│{:<3} {:<3X} {:<3}", i, i, ch)
+                if octal {
+                    format!("│{:<3} {:<3o} {:<3}", i, i, ch)
+                } else {
+                    format!("│{:<3} {:<3X} {:<3}", i, i, ch)
+                }
             };
 
             print!("{}", padded_str);

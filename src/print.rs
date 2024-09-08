@@ -6,11 +6,14 @@ pub fn print_help() {
         h: print the horizontal table (16 x 8)\n
     [options]:
         --no-color: print the table without colored output
-        --no-explain: do not display explanations for special characters"
+        --no-explain: do not display explanations for special characters
+        -O, --octal: print the table with decimal and octal values instead of hexadecimal
+        "
+        
     );
 }
 
-pub fn print_table_header(wide_col_num: usize, narrow_col_num: usize) {
+pub fn print_table_header(octal: bool, wide_col_num: usize, narrow_col_num: usize) {
     // header top
     print!("┌");
 
@@ -21,11 +24,12 @@ pub fn print_table_header(wide_col_num: usize, narrow_col_num: usize) {
     print!("{}", "───────────┬".repeat(narrow_col_num - 1));
     println!("───────────┐");
 
+    let base = if octal { "Oct" } else { "Hex" };
     // header middle
-    let tmp = format!("│{:<3} {:<3} {:<31}", "Dec", "Hex", "Chr").repeat(wide_col_num);
+    let tmp = format!("│{:<3} {:<3} {:<31}", "Dec", base, "Chr").repeat(wide_col_num);
     print!("{}", tmp);
 
-    let header = format!("│{:<3} {:<3} {:<3}", "Dec", "Hex", "Chr").repeat(narrow_col_num); // Adjust header for shorter "Chr" column
+    let header = format!("│{:<3} {:<3} {:<3}", "Dec", base, "Chr").repeat(narrow_col_num); // Adjust header for shorter "Chr" column
     print!("{}", header);
     println!("│");
 
@@ -39,7 +43,6 @@ pub fn print_table_header(wide_col_num: usize, narrow_col_num: usize) {
     println!("───────────┤");
 }
 
-
 pub fn print_table_footer(wide_col_num: usize, narrow_col_num: usize) {
     print!("└");
     print!(
@@ -49,7 +52,6 @@ pub fn print_table_footer(wide_col_num: usize, narrow_col_num: usize) {
     print!("{}", "───────────┴".repeat(narrow_col_num - 1));
     println!("───────────┘");
 }
-
 
 pub const SPECIALS_EXPLAINED: [&str; 33] = [
     "NUL ('\\0', null character)",
@@ -89,6 +91,6 @@ pub const SPECIALS_EXPLAINED: [&str; 33] = [
 
 pub const SPECIALS: [&str; 33] = [
     "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "HT", "LF", "VT", "FF", "CR",
-    "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB",
-    "ESC", "FS", "GS", "RS", "US", "DEL",
+    "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", "ESC",
+    "FS", "GS", "RS", "US", "DEL",
 ];
