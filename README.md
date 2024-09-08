@@ -50,9 +50,9 @@ cargo install --path .
 ![UI](assets/ascii.png)
 
 
-## Note
+## Notice
 
-- size of vertical table: 49x30
-- size of horizontal table: 97x20
+- Size of vertical table: 77 x 36
+- Size of horizontal table: 153 x 20
 
-You may need to adjust your terminal window size to view the entire vertical table or to ensure correct display of the horizontal one.
+You may need to adjust your terminal window size to view the entire vertical table or ensure the correct horizontal display.
