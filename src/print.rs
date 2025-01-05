@@ -8,6 +8,8 @@ pub fn print_help() {
         --no-color: print the table without colored output
         --no-explain: do not display explanations for special characters
         -O, --octal: print the table with decimal and octal values instead of hexadecimal
+        --help: show this help message
+        --version: show asciit version
         "
         
     );
