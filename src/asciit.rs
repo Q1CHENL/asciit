@@ -37,6 +37,10 @@ fn main() {
                 print::print_help();
                 exit(0);
             }
+            "--version" => {
+                println!("asciit 1.0.1");
+                exit(0);
+            }
             _ => {
                 eprintln!("Unknown argument: {}", argument);
                 print::print_help();
