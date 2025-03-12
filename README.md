@@ -13,6 +13,7 @@ cargo build --release
 ## Installation
 
 - Cargo
+
 ```bash
 cargo install asciit
 ```
@@ -20,7 +21,7 @@ cargo install asciit
 - Fedora Linux:
 
 ```bash
-dnf copr enable qichen/asciit # enable the repo 
+dnf copr enable qichen/asciit # enable the repo
 dnf install asciit # install
 ```
 
@@ -41,14 +42,13 @@ cargo install --path .
 ## Screenshots & Comparison
 
 `asciit` or `asciit v`
-![UI](assets/screenshot-v.png)
+![UI](assets/screenshot.png)
 `man 7 ascii`
 ![UI](assets/man7ascii.png)
 `asciit h --no-explain`
 ![UI](assets/screenshot-h-no-explain.png)
 `ascii`
 ![UI](assets/ascii.png)
-
 
 ## Notice
 
