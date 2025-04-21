@@ -1,17 +1,20 @@
 pub fn print_help() {
     println!(
-        "   Usage: asciit <view> [options]\n
+"    Usage:
+        asciit <view> [options]    (print ascii table)
+        asciit \"<str>\"             (string-to-hex conversion)
+
     <view>:
-        v: print the vertical table (32 x 4) (default)
-        h: print the horizontal table (16 x 8)\n
+        -v: print the vertical table (32 x 4) (default)
+        -h: print the horizontal table (16 x 8)
+
     [options]:
         --no-color: print the table without colored output
         --no-explain: do not display explanations for special characters
         -O, --octal: print the table with decimal and octal values instead of hexadecimal
         --help: show this help message
         --version: show asciit version
-        "
-        
+"
     );
 }
 

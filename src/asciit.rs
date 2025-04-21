@@ -15,12 +15,12 @@ fn main() {
     // Parse arguments
     for argument in &args {
         match argument.as_str() {
-            "h" => {
+            "-h" => {
                 row_number = 16;
                 col_number = 8;
                 horizontal = true;
             }
-            "v" => {
+            "-v" => {
                 row_number = 32;
                 col_number = 4;
             }
