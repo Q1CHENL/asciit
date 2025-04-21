@@ -1,6 +1,6 @@
-use colored::*;
 use std::{env, process::exit};
 mod print;
+mod color;
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -103,15 +103,16 @@ fn main() {
 
 // return the final formatted (colored) character
 fn format_character(i: u8, use_color: bool, specials_explained: &[&str; 33]) -> String {
+    use color::FixedColorize;
     if i.is_ascii_graphic() || i == 32 {
         let char_i = i as char;
         if use_color {
             if char_i.is_lowercase() {
-                return format!("{}  ", char_i.to_string().bright_blue());
+                return format!("{}  ", char_i.to_string().fixed_bright_blue());
             } else if char_i.is_uppercase() {
-                return format!("{}  ", char_i.to_string().blue());
+                return format!("{}  ", char_i.to_string().fixed_blue());
             } else if char_i.is_ascii_digit() {
-                return format!("{}  ", char_i.to_string().green());
+                return format!("{}  ", char_i.to_string().fixed_green());
             }
         }
         return char_i.to_string();

@@ -14,4 +14,4 @@ name = "asciit"
 path = "src/asciit.rs"
 
 [dependencies]
-colored = "2.1.0"
+crossterm = "0.29"
