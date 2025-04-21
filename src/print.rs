@@ -86,7 +86,7 @@ pub fn print_string_to_hex(input: &str) {
     print!("{}", v);
     // header label
     print!("{:^3}", "Str");
-    for (i, c) in chars.iter().enumerate() {
+    for (_, c) in chars.iter().enumerate() {
         print!("{}", v);
         print!("{:>2} ", c);
     }
@@ -111,7 +111,7 @@ pub fn print_string_to_hex(input: &str) {
     print!("{}", v);
     // header label
     print!("{:^3}", "Hex");
-    for (i, c) in chars.iter().enumerate() {
+    for (_, c) in chars.iter().enumerate() {
         print!("{}", v);
         print!("{:>2X} ", *c as u8);
     }
