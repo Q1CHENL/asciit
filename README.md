@@ -42,7 +42,7 @@ cargo install --path .
 ## Screenshots & Comparison
 
 `asciit` or `asciit -v`
-![UI](assets/screenshot.png)
+![UI](assets/screenshot-v.png)
 `man 7 ascii`
 ![UI](assets/man7ascii.png)
 `asciit -h --no-explain`
