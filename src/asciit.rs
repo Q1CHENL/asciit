@@ -44,7 +44,7 @@ fn main() {
                 exit(0);
             }
             "--version" => {
-                println!("asciit 1.0.2");
+                println!("asciit v{}", env!("CARGO_PKG_VERSION"));
                 exit(0);
             }
             _ => {
