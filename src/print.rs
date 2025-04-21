@@ -58,6 +58,78 @@ pub fn print_table_footer(wide_col_num: usize, narrow_col_num: usize) {
     println!("───────────┘");
 }
 
+pub fn print_string_to_hex(input: &str) {
+    let chars: Vec<char> = input.chars().collect();
+    let n = chars.len();
+    // Table symbols
+    let h = "───"; // horizontal
+    let v = "│";   // vertical
+    let tl = "┌";  // top left
+    let tr = "┐";  // top right
+    let bl = "└";  // bottom left
+    let br = "┘";  // bottom right
+    let t = "┬";   // top junction
+    let b = "┴";   // bottom junction
+
+    // Top border
+    print!("{}", tl);
+    // header column border
+    print!("{}", h);
+    print!("{}", t);
+    for i in 0..n {
+        print!("{}", h);
+        if i != n - 1 { print!("{}", t); }
+    }
+    println!("{}", tr);
+
+    // Chars row
+    print!("{}", v);
+    // header label
+    print!("{:^3}", "Str");
+    for (i, c) in chars.iter().enumerate() {
+        print!("{}", v);
+        print!("{:>2} ", c);
+    }
+    println!("{}", v);
+
+    // Separator
+    let sep_left = "├";
+    let sep_mid = "┼";
+    let sep_h = "─";
+    let sep_right = "┤";
+    print!("{}", sep_left);
+    // header separator
+    print!("{}{}{}", sep_h, sep_h, sep_h);
+    print!("{}", sep_mid);
+    for i in 0..n {
+        print!("{}{}{}", sep_h, sep_h, sep_h);
+        if i != n - 1 { print!("{}", sep_mid); }
+    }
+    println!("{}", sep_right);
+
+    // Hex row
+    print!("{}", v);
+    // header label
+    print!("{:^3}", "Hex");
+    for (i, c) in chars.iter().enumerate() {
+        print!("{}", v);
+        print!("{:>2X} ", *c as u8);
+    }
+    println!("{}", v);
+
+    // Bottom border
+    print!("{}", bl);
+    // header column border
+    print!("{}", h);
+    print!("{}", b);
+    for i in 0..n {
+        print!("{}", h);
+        if i != n - 1 { print!("{}", b); }
+    }
+    println!("{}", br);
+    return;
+}
+
 pub const SPECIALS_EXPLAINED: [&str; 33] = [
     "NUL ('\\0', null character)",
     "SOH (start of heading)",

@@ -12,6 +12,12 @@ fn main() {
     let mut horizontal = false;
     let mut octal = false;
 
+    if args.len() == 1 && !args[0].starts_with('-') {
+        let input = &args[0];
+        print::print_string_to_hex(input);
+        exit(0);
+    }
+
     // Parse arguments
     for argument in &args {
         match argument.as_str() {
